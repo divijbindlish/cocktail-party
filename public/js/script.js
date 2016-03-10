@@ -53,7 +53,7 @@ $(document).on('ready', function () {
             var $this = $(this);
             var signalToToggle = $this.attr('signal');
             var wave = waves[signalToToggle];
-            var zoomLevel = Number($this.val());
+            var zoomLevel = 5*Number($this.val());
             wave.zoom(zoomLevel);
         })
     });
