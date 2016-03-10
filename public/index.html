@@ -3,10 +3,31 @@
 <head>
     <title>Blind source separation</title>
     <link rel='stylesheet' href='/css/reset.css'>
+    <link rel='stylesheet' href='/css/pure-buttons.css'>
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:400,300'>
     <link rel='stylesheet' href='/css/style.css'>
 </head>
 <body>
-    <p>hello, world</p>
+    <div class='container'>
+        <div class='header'>
+            <h1>Blind source separation</h1>
+        </div>
+        <div class='content'>
+            <div class='content-top'>
+                <div class='linear'>
+                    <h2>Linear mixtures</h2>
+                    <button class='pure-button pure-button-primary' sample='single_sine'>Two monotones</button>
+                    <button class='pure-button pure-button-primary' sample='linear_voice_music'>Voice and music</button>
+                    <button class='pure-button pure-button-primary' sample='linear_voice_voice'>Two voices</button>
+                </div>
+                <div class='conv'>
+                    <h2>Convolutive mixtures</h2>
+                    <button class='pure-button pure-button-primary' sample='conv_voice_music'>Voice and music</button>
+                    <button class='pure-button pure-button-primary' sample='conv_voice_voice'>Two voices</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <script src='/js/jquery-2.2.1.min.js'></script>
     <script src='/js/script.js'></script>
 </body>
