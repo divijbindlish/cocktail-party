@@ -37,15 +37,18 @@ body, html {
     margin-top: 1.7em;
 }
 
-.content-top h2 {
+h2 {
     font-size: 1.2em;
-    margin-bottom: 1em;
+    margin-bottom: 0.75em;
 }
 
 .content-top .linear {
     float: left;
     padding-right: 1em;
-    border-right: 1px solid #cfcfcf;
+}
+
+.content-top {
+    overflow: auto;
 }
 
 .content-top .conv {
@@ -55,4 +58,13 @@ body, html {
 
 .content-top .pure-button {
     margin-left: 0.25em;
+}
+
+.content-algorithm {
+    margin-top: 2em;
+}
+
+.content-algorithm .pure-button {
+    padding-left: 2.5em;
+    padding-right: 2.5em;
 }
