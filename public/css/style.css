@@ -12,10 +12,14 @@ body, html {
     height: 100%;
 }
 
+.hidden {
+    display: none;
+}
+
 .container {
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.1);
     background-color: #ffffff;
-    width: 768px;
+    width: 778px;
     margin: 0 auto;
     height: 100%;
     overflow: auto;
@@ -61,10 +65,43 @@ h2 {
 }
 
 .content-algorithm {
-    margin-top: 2em;
+    margin-top: 1em;
 }
 
 .content-algorithm .pure-button {
     padding-left: 2.5em;
     padding-right: 2.5em;
+}
+
+.button-secondary {
+    color: white;
+    background: rgb(66, 184, 221); /* this is a light blue */
+}
+
+.content-waveforms {
+    overflow: auto;
+    margin-top: 2em;
+}
+
+.content-waveforms .waveform-container {
+    float: left;
+    width: 50%;
+    overflow: auto;
+    box-sizing: border-box;
+    padding: 2em;
+}
+
+.waveform-container .waveform {
+    margin-bottom: 1em;
+}
+
+.waveform-container .play-pause {
+    float: left;
+    margin-left: 3em;
+}
+
+.waveform-container .slider {
+    float: left;
+    margin-left: 2em;
+    margin-top: 0.23em;
 }

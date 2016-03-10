@@ -28,7 +28,31 @@
                     <button class='pure-button' sample='conv_voice_voice'>Two voices</button>
                 </div>
             </div>
-            <div class='content-algorithm'>
+            <div class='content-waveforms hidden'>
+                <h2>Original signals</h2>
+                <div class='waveform-container' signal='os1'>
+                    <div class='waveform' signal='os1' id='os1'></div>
+                    <button class='play-pause pure-button button-secondary' signal='os1'>Play</button>
+                    <input class='slider' signal='os1' type='range' min='1' max='200' value='1'/>
+                </div>
+                <div class='waveform-container' signal='os2'>
+                    <div class='waveform' signal='os2' id='os2'></div>
+                    <button class='play-pause pure-button button-secondary' signal='os2'>Play</button>
+                    <input class='slider' signal='os2' type='range' min='1' max='200' value='1'/>
+                </div>
+                <h2>Mixed signals</h2>
+                <div class='waveform-container' signal='ms1'>
+                    <div class='waveform' signal='ms1' id='ms1'></div>
+                    <button class='play-pause pure-button button-secondary' signal='ms1'>Play</button>
+                    <input class='slider' signal='ms1' type='range' min='1' max='200' value='1'/>
+                </div>
+                <div class='waveform-container' signal='ms2'>
+                    <div class='waveform' signal='ms2' id='ms2'></div>
+                    <button class='play-pause pure-button button-secondary' signal='ms2'>Play</button>
+                    <input class='slider' signal='ms2' type='range' min='1' max='200' value='1'/>
+                </div>
+            </div>
+            <div class='content-algorithm hidden'>
                 <h2>Select algorithm</h2>
                 <button class='pure-button pure-button-primary' algorithm='svd'>SVD</button>
                 <button class='pure-button pure-button-primary' algorithm='ica'>ICA</button>
