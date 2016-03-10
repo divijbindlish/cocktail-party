@@ -66,6 +66,7 @@ h2 {
 
 .content-algorithm {
     margin-top: 1em;
+    margin-bottom: 1em;
 }
 
 .content-algorithm .pure-button {
@@ -83,7 +84,7 @@ h2 {
     margin-top: 2em;
 }
 
-.content-waveforms .waveform-container {
+.waveform-container {
     float: left;
     width: 50%;
     overflow: auto;
@@ -104,4 +105,8 @@ h2 {
     float: left;
     margin-left: 2em;
     margin-top: 0.23em;
+}
+
+.info {
+    font-style: italic;
 }

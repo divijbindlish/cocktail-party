@@ -3,6 +3,46 @@ $(document).on('ready', function () {
     var selectedAlgorithm = undefined;
     var waves = {};
 
+    var infoMap = {
+        'single_sine': 'WAVE audio, 8 bit, mono, 44100 Hz',
+        'linear_voice_music': 'WAVE audio, 8 bit, mono 8000 Hz',
+        'linear_voice_voice': 'WAVE audio, 8 bit, mono 8000 Hz',
+        'conv_voice_music': 'WAVE audio, 16 bit, mono 16000 Hz',
+        'conv_voice_voice': 'WAVE audio, 16 bit, mono 16000 Hz'
+    };
+
+    var createWave = function (signal, url) {
+        var wave = WaveSurfer.create({
+            container: '#' + signal,
+            waveColor: 'violet',
+            progressColor: 'purple',
+            normalize: true
+        });
+
+        wave.load(url);
+        waves[signal] = wave;
+
+        $('.play-pause[signal=' + signal + ']').on('click', function () {
+            var $this = $(this);
+            var signalToToggle = $this.attr('signal');
+            var wave = waves[signalToToggle];
+            wave.playPause();
+            if ($this.html() == 'Play') {
+                $this.html('Pause');
+            } else {
+                $this.html('Play');
+            }
+        });
+
+        $('.slider[signal=' + signal + ']').on('input', function () {
+            var $this = $(this);
+            var signalToToggle = $this.attr('signal');
+            var wave = waves[signalToToggle];
+            var zoomLevel = 5*Number($this.val());
+            wave.zoom(zoomLevel);
+        });
+    }
+
     $('.content-top .pure-button').on('click', function () {
         $this = $(this);
 
@@ -11,6 +51,8 @@ $(document).on('ready', function () {
         var sample = $this.attr('sample');
         $('.content-top .pure-button-active').removeClass('pure-button-active');
         $this.addClass('pure-button-active');
+
+        $('.content-waveforms .info').html(infoMap[sample]);
 
         $('.content-algorithm').show();
 
@@ -27,35 +69,8 @@ $(document).on('ready', function () {
             var signal = signals[i];
             var url = '/oct/sound/' + sample + urls[i];
 
-            var wave = WaveSurfer.create({
-                container: '#' + signal,
-                waveColor: 'violet',
-                progressColor: 'purple'
-            });
-
-            wave.load(url);
-            waves[signal] = wave;
+            createWave(signal, url);
         }
-
-        $('.content-waveforms .play-pause').on('click', function () {
-            var $this = $(this);
-            var signalToToggle = $this.attr('signal');
-            var wave = waves[signalToToggle];
-            wave.playPause();
-            if ($this.html() == 'Play') {
-                $this.html('Pause');
-            } else {
-                $this.html('Play');
-            }
-        });
-
-        $('.content-waveforms .slider').on('input', function () {
-            var $this = $(this);
-            var signalToToggle = $this.attr('signal');
-            var wave = waves[signalToToggle];
-            var zoomLevel = 5*Number($this.val());
-            wave.zoom(zoomLevel);
-        })
     });
 
     $('.content-algorithm .pure-button').on('click', function () {
@@ -74,7 +89,35 @@ $(document).on('ready', function () {
 
         selectedAlgorithm = algorithm;
         console.log('Algorithm: ' + algorithm);
-        console.log('TODO: Fetch results');
+
+        // START TIMER
+
+        $.ajax({
+            url: '/run/' + algorithm + '/' + selectedSample,
+            success: function (data) {
+                console.log(data);
+            },
+            error: function (xhr) {
+                console.log(xhr);
+            }
+        });
+
+        setTimeout(function () {
+            // STOP TIMER
+            $('.content-output').show();
+
+            var signals = ['out1', 'out2'];
+            var base = '/' + selectedAlgorithm + '_output'
+            var urls = [base + '/1', base + '/2'];
+
+            for (var i = 0; i < 2; i++) {
+                var signal = signals[i];
+                var url = '/oct/sound/' + selectedSample + urls[i];
+
+                createWave(signal, url);
+            }
+        }, 1500);
+
     });
 
 });
