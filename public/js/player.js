@@ -4,7 +4,7 @@ var wavesurfer = WaveSurfer.create({
   progressColor: 'purple'
 });
 
-wavesurfer.load('http://ia902606.us.archive.org/35/items/shortpoetry_047_librivox/song_cjrg_teasdale_64kb.mp3');
+wavesurfer.load('/oct/sound/conv_voice_voice/original/1');
 
 var slider = document.querySelector('#slider');
 
