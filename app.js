@@ -48,7 +48,9 @@ app.get('/oct/:type/:sample/:directory/:number', function (req, res) {
     var number = req.params.number;
 
     if (! (sample in sampleMap) || ! (directory in directoryMap)
-        || ! (number == '1' || number == '2' || number == 'stats')
+        || ! (number == '1' || number == '2' || number == 'stats'
+              || number == 'origDist' || number == 'mixDist'
+              || number == 'outDist')
         || ! (extension in extensionMap)) {
         res.status(404);
         res.end('Not Found');

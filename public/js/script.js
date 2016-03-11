@@ -125,12 +125,13 @@ $(document).on('ready', function () {
                         setTimeout(function () {
                             $('.content-graphs .spinner').hide();
                             $('.content-graphs .rest').show();
+                            var base = '/oct/graph/' + selectedSample + '/'
+                                + selectedAlgorithm + '_output';
+                            var urls = ['origDist', 'mixDist', 'outDist'];
+                            var signals = ['os', 'ms', 'out'];
 
-                            var urls = ['/img/test.jpg', '/img/test.jpg', '/img/test.jpg', '/img/test.jpg', '/img/test.jpg', '/img/test.jpg'];
-                            var signals = ['os1', 'os2', 'ms1', 'ms2', 'out1', 'out2'];
-
-                            for (var i = 0; i < 6; i++) {
-                                var url = urls[i];
+                            for (var i = 0; i < 3; i++) {
+                                var url = base + '/' + urls[i];
                                 var signal = signals[i];
 
                                 $('.graph-container[signal=' + signal + ']').append('<img src="' + url + '">');
