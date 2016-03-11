@@ -16,7 +16,7 @@ $(document).on('ready', function () {
             container: '#' + signal,
             waveColor: 'violet',
             progressColor: 'purple',
-            normalize: true
+            normalize: true,
         });
 
         wave.load(url);
@@ -119,6 +119,7 @@ $(document).on('ready', function () {
                     }
 
                     $('#final').on('click', function () {
+                        $('#final').hide();
                         $('.content-graphs').show();
                         $('.container').scrollTop($('.container')[0].scrollHeight);
 
@@ -127,17 +128,27 @@ $(document).on('ready', function () {
                             $('.content-graphs .rest').show();
                             var base = '/oct/graph/' + selectedSample + '/'
                                 + selectedAlgorithm + '_output';
+
                             var urls = ['origDist', 'mixDist', 'outDist'];
                             var signals = ['os', 'ms', 'out'];
 
-                            for (var i = 0; i < 3; i++) {
+                            if (selectedAlgorithm == 'ica') {
+                                urls.push('whiteDist')
+                                signals.push('white')
+                                $('.graph-container[signal=white]').show();
+                            }
+
+                            for (var i = 0; i < signals.length; i++) {
                                 var url = base + '/' + urls[i];
                                 var signal = signals[i];
 
                                 $('.graph-container[signal=' + signal + ']').append('<img src="' + url + '">');
                             }
+
                         }, 1500);
                     });
+
+                    $('#final').trigger('click');
                 }
             });
         }, 2500);
