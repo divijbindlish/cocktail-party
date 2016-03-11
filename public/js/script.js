@@ -52,25 +52,26 @@ $(document).on('ready', function () {
         $('.content-top .pure-button-active').removeClass('pure-button-active');
         $this.addClass('pure-button-active');
 
-        $('.content-waveforms .info').html(infoMap[sample]);
-
-        $('.content-algorithm').show();
-
         $('.content-waveforms').show();
 
-        selectedSample = sample;
-        console.log('Selected: ' + sample);
+        setTimeout(function () {
+            $('.content-waveforms .spinner').hide();
+            $('.content-waveforms .rest').show();
+            $('.content-waveforms .info').html(infoMap[sample]);
+            $('.content-algorithm').show();
+            selectedSample = sample;
+            console.log('Selected: ' + sample);
 
-        firstPass = false;
-        var signals = ['os1', 'os2', 'ms1', 'ms2'];
-        var urls = ['/original/1', '/original/2', '/mixture/1', '/mixture/2'];
+            var signals = ['os1', 'os2', 'ms1', 'ms2'];
+            var urls = ['/original/1', '/original/2', '/mixture/1', '/mixture/2'];
 
-        for (var i = 0; i < 4; i++) {
-            var signal = signals[i];
-            var url = '/oct/sound/' + sample + urls[i];
+            for (var i = 0; i < 4; i++) {
+                var signal = signals[i];
+                var url = '/oct/sound/' + sample + urls[i];
 
-            createWave(signal, url);
-        }
+                createWave(signal, url);
+            }
+        }, 750)
     });
 
     $('.content-algorithm .pure-button').on('click', function () {
@@ -91,32 +92,34 @@ $(document).on('ready', function () {
         console.log('Algorithm: ' + algorithm);
 
         // START TIMER
-
-        $.ajax({
-            url: '/run/' + algorithm + '/' + selectedSample,
-            success: function (data) {
-                console.log(data);
-            },
-            error: function (xhr) {
-                console.log(xhr);
-            }
-        });
+        $('.content-output').show();
+        $('.container').scrollTop($('.container')[0].scrollHeight);
 
         setTimeout(function () {
             // STOP TIMER
-            $('.content-output').show();
+            $.ajax({
+                url: '/oct/info/' + selectedSample + '/' + selectedAlgorithm
+                     + '_output/stats',
+                dataType: 'json',
+                success: function(data) {
+                    $('.content-output .spinner').hide();
+                    $('.content-output .rest').show();
+                    $('#time').html(data['time'] + ' sec');
+                    $('#coer').html(data['cor']);
 
-            var signals = ['out1', 'out2'];
-            var base = '/' + selectedAlgorithm + '_output'
-            var urls = [base + '/1', base + '/2'];
+                    var signals = ['out1', 'out2'];
+                    var base = '/' + selectedAlgorithm + '_output'
+                    var urls = [base + '/1', base + '/2'];
 
-            for (var i = 0; i < 2; i++) {
-                var signal = signals[i];
-                var url = '/oct/sound/' + selectedSample + urls[i];
+                    for (var i = 0; i < 2; i++) {
+                        var signal = signals[i];
+                        var url = '/oct/sound/' + selectedSample + urls[i];
 
-                createWave(signal, url);
-            }
-        }, 1500);
+                        createWave(signal, url);
+                    }
+                }
+            });
+        }, 2000);
 
     });
 

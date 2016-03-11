@@ -29,27 +29,36 @@
                 </div>
             </div>
             <div class='content-waveforms hidden'>
-                <h2 class='info'></h2>
-                <div class='waveform-container' signal='os1'>
-                    <div class='waveform' signal='os1' id='os1'></div>
-                    <button class='play-pause pure-button button-secondary' signal='os1'>Play</button>
-                    <input class='slider' signal='os1' type='range' min='1' max='200' value='1'/>
+                <div class="spinner">
+                    <div class="rect1"></div>
+                    <div class="rect2"></div>
+                    <div class="rect3"></div>
+                    <div class="rect4"></div>
+                    <div class="rect5"></div>
                 </div>
-                <div class='waveform-container' signal='os2'>
-                    <div class='waveform' signal='os2' id='os2'></div>
-                    <button class='play-pause pure-button button-secondary' signal='os2'>Play</button>
-                    <input class='slider' signal='os2' type='range' min='1' max='200' value='1'/>
-                </div>
-                <h2>Mixed signals</h2>
-                <div class='waveform-container' signal='ms1'>
-                    <div class='waveform' signal='ms1' id='ms1'></div>
-                    <button class='play-pause pure-button button-secondary' signal='ms1'>Play</button>
-                    <input class='slider' signal='ms1' type='range' min='1' max='200' value='1'/>
-                </div>
-                <div class='waveform-container' signal='ms2'>
-                    <div class='waveform' signal='ms2' id='ms2'></div>
-                    <button class='play-pause pure-button button-secondary' signal='ms2'>Play</button>
-                    <input class='slider' signal='ms2' type='range' min='1' max='200' value='1'/>
+                <div class='rest hidden'>
+                    <h2 class='info'></h2>
+                    <div class='waveform-container' signal='os1'>
+                        <div class='waveform' signal='os1' id='os1'></div>
+                        <button class='play-pause pure-button button-secondary' signal='os1'>Play</button>
+                        <input class='slider' signal='os1' type='range' min='1' max='200' value='1'/>
+                    </div>
+                    <div class='waveform-container' signal='os2'>
+                        <div class='waveform' signal='os2' id='os2'></div>
+                        <button class='play-pause pure-button button-secondary' signal='os2'>Play</button>
+                        <input class='slider' signal='os2' type='range' min='1' max='200' value='1'/>
+                    </div>
+                    <h2>Mixed signals</h2>
+                    <div class='waveform-container' signal='ms1'>
+                        <div class='waveform' signal='ms1' id='ms1'></div>
+                        <button class='play-pause pure-button button-secondary' signal='ms1'>Play</button>
+                        <input class='slider' signal='ms1' type='range' min='1' max='200' value='1'/>
+                    </div>
+                    <div class='waveform-container' signal='ms2'>
+                        <div class='waveform' signal='ms2' id='ms2'></div>
+                        <button class='play-pause pure-button button-secondary' signal='ms2'>Play</button>
+                        <input class='slider' signal='ms2' type='range' min='1' max='200' value='1'/>
+                    </div>
                 </div>
             </div>
             <div class='content-algorithm hidden'>
@@ -58,19 +67,28 @@
                 <button class='pure-button pure-button-primary' algorithm='ica'>ICA</button>
             </div>
             <div class='content-output hidden'>
-                <br><h2>Separated signals</h2>
-                <div class='waveform-container' signal='out1'>
-                    <div class='waveform' signal='out1' id='out1'></div>
-                    <button class='play-pause pure-button button-secondary' signal='out1'>Play</button>
-                    <input class='slider' signal='out1' type='range' min='1' max='200' value='1'/>
+                <div class="spinner">
+                    <div class="rect1"></div>
+                    <div class="rect2"></div>
+                    <div class="rect3"></div>
+                    <div class="rect4"></div>
+                    <div class="rect5"></div>
                 </div>
-                <div class='waveform-container' signal='out2'>
-                    <div class='waveform' signal='out2' id='out2'></div>
-                    <button class='play-pause pure-button button-secondary' signal='out2'>Play</button>
-                    <input class='slider' signal='out2' type='range' min='1' max='200' value='1'/>
+                <div class='rest hidden'>
+                    <br><h2>Separated signals</h2>
+                    <div class='waveform-container' signal='out1'>
+                        <div class='waveform' signal='out1' id='out1'></div>
+                        <button class='play-pause pure-button button-secondary' signal='out1'>Play</button>
+                        <input class='slider' signal='out1' type='range' min='1' max='200' value='1'/>
+                    </div>
+                    <div class='waveform-container' signal='out2'>
+                        <div class='waveform' signal='out2' id='out2'></div>
+                        <button class='play-pause pure-button button-secondary' signal='out2'>Play</button>
+                        <input class='slider' signal='out2' type='range' min='1' max='200' value='1'/>
+                    </div>
+                    <br><h2 class='info'><b>Correlation</b>: <span id='coer'></span></h2>
+                    <h2 class='info'><b>Time</b>: <span id='time'></span></h2>
                 </div>
-                <br><h2 class='info'>Correlation: <span id='coer'></span></h2>
-                <h2 class='info'>Time: <span id='time'></span></h2>
             </div>
         </div>
     </div>

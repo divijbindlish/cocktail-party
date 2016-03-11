@@ -21,6 +21,7 @@ var scriptMap = {
 var extensionMap = {
     'sound': 'wav',
     'graph': 'png',
+    'info': 'json'
 };
 
 var directoryMap = {
@@ -47,7 +48,7 @@ app.get('/oct/:type/:sample/:directory/:number', function (req, res) {
     var number = req.params.number;
 
     if (! (sample in sampleMap) || ! (directory in directoryMap)
-        || ! (number == '1' || number == '2')
+        || ! (number == '1' || number == '2' || number == 'stats')
         || ! (extension in extensionMap)) {
         res.status(404);
         res.end('Not Found');
@@ -75,9 +76,11 @@ app.get('/run/:algorithm/:sample', function (req, res) {
     console.log('Run: ' + algorithm.toUpperCase() + ', ' + sample);
 
     var args = [
-        config['octave_code_directory'] + '/' + scriptMap[algorithm],
+        scriptMap[algorithm],
         sampleMap[sample]
     ];
+
+    console.log(args);
 
     cmd = spawn('octave', args);
 
@@ -87,7 +90,7 @@ app.get('/run/:algorithm/:sample', function (req, res) {
 
     cmd.stdout.on('close', function (code) {
         console.log('Command exited with code: ' + String(code));
-        res.end(JSON.stringify({ 'status': 'OK' }));
+        res.end(JSON.stringify({ 'status': 'OK', 'code': code }));
     })
 });
 
