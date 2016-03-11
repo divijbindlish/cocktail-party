@@ -38,7 +38,7 @@ $(document).on('ready', function () {
             var $this = $(this);
             var signalToToggle = $this.attr('signal');
             var wave = waves[signalToToggle];
-            var zoomLevel = 5*Number($this.val());
+            var zoomLevel = 7.5*Number($this.val());
             wave.zoom(zoomLevel);
         });
     }
@@ -117,9 +117,29 @@ $(document).on('ready', function () {
 
                         createWave(signal, url);
                     }
+
+                    $('#final').on('click', function () {
+                        $('.content-graphs').show();
+                        $('.container').scrollTop($('.container')[0].scrollHeight);
+
+                        setTimeout(function () {
+                            $('.content-graphs .spinner').hide();
+                            $('.content-graphs .rest').show();
+
+                            var urls = ['/img/test.jpg', '/img/test.jpg', '/img/test.jpg', '/img/test.jpg', '/img/test.jpg', '/img/test.jpg'];
+                            var signals = ['os1', 'os2', 'ms1', 'ms2', 'out1', 'out2'];
+
+                            for (var i = 0; i < 6; i++) {
+                                var url = urls[i];
+                                var signal = signals[i];
+
+                                $('.graph-container[signal=' + signal + ']').append('<img src="' + url + '">');
+                            }
+                        }, 1500);
+                    });
                 }
             });
-        }, 2000);
+        }, 2500);
 
     });
 

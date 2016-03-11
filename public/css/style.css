@@ -23,6 +23,7 @@ body, html {
     margin: 0 auto;
     height: 100%;
     overflow: auto;
+    padding-bottom: 1em;
 }
 
 .header {
@@ -162,4 +163,19 @@ h2 {
     transform: scaleY(1.0);
     -webkit-transform: scaleY(1.0);
   }
+}
+
+.content-graphs {
+    overflow: auto;
+}
+.content-graphs .graph-container {
+    float: left;
+    padding: 1em;
+    width: 50%;
+    box-sizing: border-box;
+}
+
+.graph-container img {
+    width: 100%;
+    height: 100%;
 }

@@ -87,8 +87,28 @@
                         <input class='slider' signal='out2' type='range' min='1' max='200' value='1'/>
                     </div>
                     <br><h2 class='info'><b>Correlation</b>: <span id='coer'></span></h2>
-                    <h2 class='info'><b>Time</b>: <span id='time'></span></h2>
+                    <h2 class='info'><b>Execution time</b>: <span id='time'></span></h2>
+                    <br><button class='pure-button pure-button-primary' id='final'>Draw distribution graphs</button>
                 </div>
+            </div>
+            <div class='content-graphs hidden'>
+            <div class="spinner">
+                <div class="rect1"></div>
+                <div class="rect2"></div>
+                <div class="rect3"></div>
+                <div class="rect4"></div>
+                <div class="rect5"></div>
+            </div>
+            <div class='rest hidden'>
+                <br><h2>Original signals</h2>
+                <div class='graph-container' signal='os1'></div>
+                <div class='graph-container' signal='os2'></div>
+                <br><h2>Mixed signals</h2>
+                <div class='graph-container' signal='ms1'></div>
+                <div class='graph-container' signal='ms2'></div>
+                <br><h2>Separated signals</h2>
+                <div class='graph-container' signal='out1'></div>
+                <div class='graph-container' signal='out2'></div>
             </div>
         </div>
     </div>
