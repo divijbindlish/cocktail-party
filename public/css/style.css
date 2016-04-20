@@ -56,16 +56,15 @@ h2 {
 }
 
 .content-top .linear {
-    float: left;
     padding-right: 1em;
 }
 
 .content-top {
     overflow: auto;
+    margin-top: 2em;
 }
 
 .content-top .conv {
-    float: left;
     margin-left: 0.75em;
 }
 
