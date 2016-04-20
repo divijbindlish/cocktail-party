@@ -2,11 +2,11 @@
 <html>
 <head>
     <title>Blind source separation</title>
-    <link rel='stylesheet' href='/css/reset.css'>
-    <link rel='stylesheet' href='/css/pure-buttons.css'>
+    <link rel='stylesheet' href='/css/lib/reset.css'>
+    <link rel='stylesheet' href='/css/lib/pure-buttons.css'>
     <link rel='stylesheet' href='/css/style.css'>
 
-    <script src="/js/wavesurfer.min.js"></script>
+    <script src="/js/lib/wavesurfer.min.js"></script>
 </head>
 <body>
     <div class='container'>
@@ -17,14 +17,14 @@
             <div class='content-top'>
                 <div class='linear'>
                     <h2>Linear mixtures</h2>
-                    <button class='pure-button' sample='single_sine'>Two monotones</button>
-                    <button class='pure-button' sample='linear_voice_music'>Voice and music</button>
-                    <button class='pure-button' sample='linear_voice_voice'>Two voices</button>
+                    <button class='pure-button' sample='singleSine'>Two monotones</button>
+                    <button class='pure-button' sample='2' info='linear_voice_music'>Voice and music</button>
+                    <button class='pure-button' sample='3' info='linear_voice_voice'>Two voices</button>
                 </div>
                 <div class='conv'>
                     <h2>Convolutive mixtures</h2>
-                    <button class='pure-button' sample='conv_voice_music'>Voice and music</button>
-                    <button class='pure-button' sample='conv_voice_voice'>Two voices</button>
+                    <button class='pure-button' sample='8' info='conv_voice_music'>Voice and music</button>
+                    <button class='pure-button' sample='5' info='conv_voice_voice'>Two voices</button>
                 </div>
             </div>
             <div class='content-waveforms hidden'>
@@ -107,7 +107,7 @@
         </div>
     </div>
 
-    <script src='/js/jquery-2.2.1.min.js'></script>
+    <script src='/js/lib/jquery-2.2.1.min.js'></script>
     <script src='/js/script.js'></script>
 </body>
 </html>

@@ -63,11 +63,16 @@ $(document).on('ready', function () {
             console.log('Selected: ' + sample);
 
             var signals = ['os1', 'os2', 'ms1', 'ms2'];
-            var urls = ['/original/1', '/original/2', '/mixture/1', '/mixture/2'];
+            var urls = [
+                '/original_sources/' + sample + '/1.wav',
+                '/original_sources/' + sample + '/2.wav',
+                '/mixed_sources/' + sample + '/1.wav',
+                '/mixed_sources/' + sample + '/2.wav'
+            ];
 
             for (var i = 0; i < 4; i++) {
                 var signal = signals[i];
-                var url = '/oct/sound/' + sample + urls[i];
+                var url = urls[i]
 
                 createWave(signal, url);
             }
@@ -97,9 +102,10 @@ $(document).on('ready', function () {
 
         setTimeout(function () {
             // STOP TIMER
+            var base = '/' + selectedAlgorithm + '_output/' + selectedSample;
+            console.log(base);
             $.ajax({
-                url: '/oct/info/' + selectedSample + '/' + selectedAlgorithm
-                     + '_output/stats',
+                url: base + '/stats.json',
                 dataType: 'json',
                 success: function(data) {
                     $('.content-output .spinner').hide();
@@ -108,13 +114,11 @@ $(document).on('ready', function () {
                     $('#coer').html(data['cor']);
 
                     var signals = ['out1', 'out2'];
-                    var base = '/' + selectedAlgorithm + '_output'
-                    var urls = [base + '/1', base + '/2'];
+                    var urls = [base + '/1.wav', base + '/2.wav'];
 
                     for (var i = 0; i < 2; i++) {
                         var signal = signals[i];
-                        var url = '/oct/sound/' + selectedSample + urls[i];
-
+                        var url = urls[i];
                         createWave(signal, url);
                     }
 
@@ -126,20 +130,22 @@ $(document).on('ready', function () {
                         setTimeout(function () {
                             $('.content-graphs .spinner').hide();
                             $('.content-graphs .rest').show();
-                            var base = '/oct/graph/' + selectedSample + '/'
-                                + selectedAlgorithm + '_output';
 
-                            var urls = ['origDist', 'mixDist', 'outDist'];
+                            var urls = [
+                                base + '/origDist.png',
+                                base + '/mixDist.png',
+                                base + '/outDist.png'
+                            ];
                             var signals = ['os', 'ms', 'out'];
 
                             if (selectedAlgorithm == 'ica') {
-                                urls.push('whiteDist')
+                                urls.push(base + '/whiteDist.png');
                                 signals.push('white')
                                 $('.graph-container[signal=white]').show();
                             }
 
                             for (var i = 0; i < signals.length; i++) {
-                                var url = base + '/' + urls[i];
+                                var url = urls[i];
                                 var signal = signals[i];
 
                                 $('.graph-container[signal=' + signal + ']').append('<img src="' + url + '">');
