@@ -27,8 +27,10 @@
                 </div>
                 <div class="conv hidden">
                     <h2>Convolutive mixtures</h2>
-                    <button class="pure-button" sample="8" info="conv_voice_music">Voice and music</button>
-                    <button class="pure-button" sample="5" info="conv_voice_voice">Two voices</button>
+                    <button class="pure-button" sample="convSineHigh" info="conv_sine">Two monotones</button>
+                    <button class="pure-button" sample="convHumanMusic" info="conv_voice_music_low">Synthetic convolution: 25ms, 13ms</button>
+                    <button class="pure-button" sample="convHumanMusicHigh" info="conv_voice_music_high">Synthetic convolution: 250ms, 130ms</button>
+                    <button class="pure-button" sample="live" info="live">Live recording</button>
                 </div>
             </div>
             <div class="content-waveforms hidden">
@@ -41,15 +43,17 @@
                 </div>
                 <div class="rest hidden">
                     <h2 class="info"></h2>
-                    <div class="waveform-container" signal="os1">
-                        <div class="waveform" signal="os1" id="os1"></div>
-                        <button class="play-pause pure-button button-secondary" signal="os1">Play</button>
-                        <input class="slider" signal="os1" type="range" min="1" max="200" value="1"/>
-                    </div>
-                    <div class="waveform-container" signal="os2">
-                        <div class="waveform" signal="os2" id="os2"></div>
-                        <button class="play-pause pure-button button-secondary" signal="os2">Play</button>
-                        <input class="slider" signal="os2" type="range" min="1" max="200" value="1"/>
+                    <div class="yolo hidden">
+                        <div class="waveform-container" signal="os1">
+                            <div class="waveform" signal="os1" id="os1"></div>
+                            <button class="play-pause pure-button button-secondary" signal="os1">Play</button>
+                            <input class="slider" signal="os1" type="range" min="1" max="200" value="1"/>
+                        </div>
+                        <div class="waveform-container" signal="os2">
+                            <div class="waveform" signal="os2" id="os2"></div>
+                            <button class="play-pause pure-button button-secondary" signal="os2">Play</button>
+                            <input class="slider" signal="os2" type="range" min="1" max="200" value="1"/>
+                        </div>
                     </div>
                     <h2>Mixed signals</h2>
                     <div class="waveform-container" signal="ms1">
@@ -66,8 +70,9 @@
             </div>
             <div class="content-algorithm hidden">
                 <h2>Select separation algorithm</h2>
-                <button class="pure-button pure-button-primary" algorithm="svd">SVD</button>
-                <button class="pure-button pure-button-primary" algorithm="ica">ICA</button>
+                <button class="pure-button pure-button-primary hidden" algorithm="svd">SVD</button>
+                <button class="pure-button pure-button-primary hidden" algorithm="ica">ICA</button>
+                <button class="pure-button pure-button-primary hidden" algorithm="conv">Multiple Decorrelation</button>
             </div>
             <div class="content-output hidden">
                 <div class="spinner">
@@ -89,9 +94,11 @@
                         <button class="play-pause pure-button button-secondary" signal="out2">Play</button>
                         <input class="slider" signal="out2" type="range" min="1" max="200" value="1"/>
                     </div>
+                    <div class="swag hidden">
                     <br><h2 class="info"><b>Correlation</b>: <span id="coer"></span></h2>
                     <h2 class="info"><b>Execution time</b>: <span id="time"></span></h2>
-                    <br><button class="pure-button pure-button-primary" id="final">Draw distribution graphs</button>
+                    </div>
+                    <br><button class="pure-button pure-button-primary hidden" id="final">Draw distribution graphs</button>
                 </div>
             </div>
             <div class="content-graphs hidden">

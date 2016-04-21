@@ -1,6 +1,7 @@
 $(document).on("ready", function () {
     var selectedSample = undefined;
     var selectedAlgorithm = undefined;
+    var mixtureType = undefined;
     var waves = {};
 
     var infoMap = {
@@ -43,6 +44,19 @@ $(document).on("ready", function () {
         });
     }
 
+    $(".mixture-type .pure-button").on("click", function () {
+        $this = $(this);
+
+        if ($this.hasClass("pure-button-active")) return;
+
+        mixtureType = $this.attr("info");
+
+        $(".mixture-type .pure-button").removeClass("pure-button-active");
+        $this.addClass("pure-button-active");
+        var className = "." + mixtureType;
+        $(className).show();
+    });
+
     $(".content-top .pure-button").on("click", function () {
         $this = $(this);
 
@@ -55,11 +69,21 @@ $(document).on("ready", function () {
         $(".content-waveforms").show();
 
         setTimeout(function () {
+            selectedSample = sample;
             $(".content-waveforms .spinner").hide();
             $(".content-waveforms .rest").show();
             $(".content-waveforms .info").html(infoMap[sample]);
             $(".content-algorithm").show();
-            selectedSample = sample;
+            if (mixtureType == "linear") {
+                $(".content-algorithm .pure-button[algorithm=svd]").show();
+                $(".content-algorithm .pure-button[algorithm=ica]").show();
+            } else {
+                if (selectedSample != "live") {
+                    $(".content-algorithm .pure-button[algorithm=svd]").show();
+                    $(".content-algorithm .pure-button[algorithm=ica]").show();
+                }
+                $(".content-algorithm .pure-button[algorithm=conv]").show();
+            }
             console.log("Selected: " + sample);
 
             var signals = ["os1", "os2", "ms1", "ms2"];
@@ -70,20 +94,23 @@ $(document).on("ready", function () {
                 "/mixed_sources/" + sample + "/2.wav"
             ];
 
-            for (var i = 0; i < 4; i++) {
+            if (selectedSample == "live") {
+                urls = [
+                    "/mixed_sources/" + sample + "/1.wav",
+                    "/mixed_sources/" + sample + "/2.wav"
+                ];
+                signals = ["ms1", "ms2"];
+            } else {
+                $(".yolo").show();
+            }
+
+            for (var i = 0; i < urls.length; i++) {
                 var signal = signals[i];
                 var url = urls[i]
 
                 createWave(signal, url);
             }
         }, 750)
-    });
-
-    $(".mixture-type .pure-button").on("click", function () {
-        var mixtureType = $(this).attr("info");
-        var className = "." + mixtureType;
-
-        $(className).show();
     });
 
     $(".content-algorithm .pure-button").on("click", function () {
@@ -110,25 +137,35 @@ $(document).on("ready", function () {
         setTimeout(function () {
             // STOP TIMER
             var base = "/" + selectedAlgorithm + "_output/" + selectedSample;
-            console.log(base);
+
+            $(".content-output .spinner").hide();
+            $(".content-output .rest").show();
+            var signals = ["out1", "out2"];
+            var urls = [base + "/1.wav", base + "/2.wav"];
+
+            for (var i = 0; i < 2; i++) {
+                var signal = signals[i];
+                var url = urls[i];
+                createWave(signal, url);
+            }
+
+            if (selectedSample == "live") {
+                return;
+            } else {
+                $(".swag").show();
+            }
+
             $.ajax({
                 url: base + "/stats.json",
                 dataType: "json",
                 success: function(data) {
-                    $(".content-output .spinner").hide();
-                    $(".content-output .rest").show();
                     $("#time").html(data["time"] + " sec");
                     $("#coer").html(data["cor"]);
-
-                    var signals = ["out1", "out2"];
-                    var urls = [base + "/1.wav", base + "/2.wav"];
-
-                    for (var i = 0; i < 2; i++) {
-                        var signal = signals[i];
-                        var url = urls[i];
-                        createWave(signal, url);
+                    if (mixtureType == "conv") {
+                        return;
                     }
 
+                    $("#final").show();
                     $("#final").on("click", function () {
                         $("#final").hide();
                         $(".content-graphs").show();
